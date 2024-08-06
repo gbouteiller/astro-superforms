@@ -6,18 +6,18 @@ This is an [Astro integration](https://docs.astro.build/en/guides/integrations-g
 
 ### Prerequisites
 
-TODO:
+You need to have [@astrojs/svelte](https://docs.astro.build/en/guides/integrations-guide/svelte/) installed in your project.
 
 ### Installation
 
 Install the integration **automatically** using the Astro CLI:
 
 ```bash
-pnpm astro add superforms
+pnpm astro add astro-superforms
 ```
 
 ```bash
-npx astro add superforms
+npx astro add astro-superforms
 ```
 
 ```bash
@@ -43,18 +43,14 @@ yarn add astro-superforms
 2. Add the integration to your astro config
 
 ```diff
-+import integration from "astro-superforms";
++import asf from "astro-superforms";
 
 export default defineConfig({
   integrations: [
-+    integration(),
++    asf(),
   ],
 });
 ```
-
-### Configuration
-
-TODO:configuration
 
 ## Contributing
 
@@ -83,4 +79,5 @@ You can now edit files in `package`. Please note that making changes to those fi
 
 ## Acknowledgements
 
-TODO:
+- [`astro-integration-kit`](https://github.com/florian-lefebvre/astro-integration-kit) by Florian Lefebvre
+- [`sveltekit-superforms`](https://github.com/ciscoheat/sveltekit-superforms) by Andreas Söderlund
