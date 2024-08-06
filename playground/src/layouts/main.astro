@@ -1,0 +1,33 @@
+---
+import "@/styles/globals.css"
+import Sheet from "./_sheet.svelte"
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Accueil</title>
+  </head>
+  <body>
+    <div class="flex min-h-screen w-full flex-col">
+      <header class="bg-background sticky top-0 flex h-16 items-center gap-4 border-b px-4 md:px-6">
+        <nav class="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+          <a href="##" class="flex items-center gap-2 text-lg font-semibold md:text-base">
+            <span>ASF</span>
+            <span class="sr-only">Astro Superforms</span>
+          </a>
+          <a href="/" class="text-muted-foreground hover:text-foreground transition-colors"> Loaded </a>
+          <a href="/unloaded" class="text-muted-foreground hover:text-foreground transition-colors"> Unloaded </a>
+        </nav>
+        <Sheet client:load />
+      </header>
+      <main class="bg-muted/40 flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,9 +1,9 @@
-# package-name
+# astro-superforms
 
-TODO:description
+Astro integration to use Sveltekit Superforms in your Astro + Svelte projects
 
 To see how to get started, check out the [package README](./package/README.md)
 
 ## Licensing
 
-[MIT Licensed](./LICENSE). Made with ❤️ by [TODO:user](https://github.com/TODO:github-user).
+[MIT Licensed](./LICENSE). Made with ❤️ by [Gregory Bouteiller](https://github.com/gbouteiller).

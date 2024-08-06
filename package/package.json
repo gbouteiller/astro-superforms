@@ -1,44 +1,55 @@
 {
-	"name": "package-name",
-	"version": "0.0.0",
-	"description": "TODO:",
-	"author": {
-		"email": "TODO:",
-		"name": "TODO:",
-		"url": "TODO:"
-	},
-	"license": "MIT",
-	"keywords": [
-		"astro-integration",
-		"astro-component",
-		"withastro",
-		"astro",
-		"TODO:"
-	],
-	"homepage": "TODO:",
-	"publishConfig": {
-		"access": "public"
-	},
-	"sideEffects": false,
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"default": "./dist/index.js"
-		}
-	},
-	"files": ["dist"],
-	"scripts": {
-		"dev": "tsup --watch",
-		"build": "tsup"
-	},
-	"type": "module",
-	"peerDependencies": {
-		"astro": "^4.13.1"
-	},
-	"dependencies": {
-		"astro-integration-kit": "^0.16.0"
-	},
-	"devDependencies": {
-		"tsup": "^8.2.4"
-	}
+  "name": "astro-superforms",
+  "version": "0.0.0",
+  "description": "Astro integration to use Sveltekit Superforms in your Astro + Svelte projects:",
+  "author": {
+    "email": "gregory.bouteiller@niama.re",
+    "name": "Gregory Bouteiller",
+    "url": "https://github.com/gbouteiller"
+  },
+  "license": "MIT",
+  "keywords": [
+    "astro-integration",
+    "astro-component",
+    "withastro",
+    "astro",
+    "svelte",
+    "sveltekit",
+    "superforms",
+    "form"
+  ],
+  "homepage": "https://github.com/gbouteiller/astro-superforms",
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "astro": "^4.13.1",
+    "devalue": "^5.0.0",
+    "sveltekit-superforms": "^2.16.1",
+    "zod": "^3.23.8"
+  },
+  "dependencies": {
+    "astro-integration-kit": "^0.16.0"
+  },
+  "devDependencies": {
+    "devalue": "^5.0.0",
+    "sveltekit-superforms": "^2.16.1",
+    "tsup": "^8.2.4",
+    "zod": "^3.23.8"
+  }
 }
