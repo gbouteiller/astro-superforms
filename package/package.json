@@ -1,6 +1,6 @@
 {
   "name": "astro-superforms",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Astro integration to use Sveltekit Superforms in your Astro + Svelte projects:",
   "author": {
     "email": "gregory.bouteiller@niama.re",
