@@ -1,5 +1,11 @@
 # astro-superforms
 
+## 0.1.2
+
+### Patch Changes
+
+- 3e9f7a3: add templates to npm package
+
 ## 0.1.1
 
 ### Patch Changes
