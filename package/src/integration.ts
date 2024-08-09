@@ -21,6 +21,11 @@ export const integration = defineIntegration({
               optimizeDeps: {
                 exclude: ["$app/environment", "$app/forms", "$app/navigation", "$app/stores"],
               },
+              resolve: {
+                alias: {
+                  "@sveltejs/kit": resolve("./virtual/kit.js"),
+                },
+              },
             },
           })
 
@@ -44,7 +49,12 @@ export const integration = defineIntegration({
             },
           })
 
-          addDts(params, {name: "@astro/superforms", content: `declare module 'asf:actions' {${serverTypes}}`})
+          addDts(params, {
+            name: "@astro/superforms",
+            content: `
+            declare module 'asf:actions' {${serverTypes}};
+            `,
+          })
         },
       },
     }

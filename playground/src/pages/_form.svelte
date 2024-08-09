@@ -30,14 +30,13 @@
     },
     onResult: (data) => {
       console.log("onResult", data.result)
-      // data.result.data = {form: data.result.form}
     },
     onUpdate: ({result, form: {message, valid}}) => {
       console.log("onUpdate", {message, result, valid})
     },
     onUpdated: ({form: {message, valid}}) => {
       console.log("onUpdated", {message, valid})
-      if (message && !valid) toast.error(message.text)
+      if (message) valid ? toast.success(message.text) : toast.error(message.text)
     },
   })
   const {delayed, enhance, form, submitting} = sf

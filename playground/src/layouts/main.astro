@@ -1,4 +1,5 @@
 ---
+import {Toaster} from "@/components/ui/sonner"
 import "@/styles/globals.css"
 import Sheet from "./_sheet.svelte"
 ---
@@ -29,5 +30,6 @@ import Sheet from "./_sheet.svelte"
         <slot />
       </main>
     </div>
+    <Toaster client:only="svelte" richColors />
   </body>
 </html>
