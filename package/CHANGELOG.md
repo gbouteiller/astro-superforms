@@ -1,5 +1,11 @@
 # astro-superforms
 
+## 0.2.1
+
+### Patch Changes
+
+- 4811a8d: set redirect arguments similar to sveltekit
+
 ## 0.2.0
 
 ### Minor Changes
