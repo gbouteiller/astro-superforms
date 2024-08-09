@@ -1,5 +1,11 @@
 # astro-superforms
 
+## 0.2.0
+
+### Minor Changes
+
+- 09e67ac: add sveltekit alias
+
 ## 0.1.2
 
 ### Patch Changes
