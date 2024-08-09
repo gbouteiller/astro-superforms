@@ -7,7 +7,7 @@ export const server = {
     signin: defineAsfAction({
       input: zSigninValues,
       handler: ({username, password}, {form, redirect}) => {
-        return redirect("/")
+        return redirect(302, "/")
         return message(form, {code: "SIGNIN_FAIL", text: "Signed in fail"}, {status: 400})
         return message(form, {code: "SIGNIN_SUCCESS", text: "Signed in successfully"})
       },

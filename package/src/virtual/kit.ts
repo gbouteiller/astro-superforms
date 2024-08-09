@@ -40,8 +40,8 @@ export class Redirect {
   ) {}
 }
 
-export function redirect(location: string | URL, status?: RedirectStatus) {
-  throw new Redirect(status ?? 302, location.toString())
+export function redirect(status: RedirectStatus, location: string | URL) {
+  throw new Redirect(status, location.toString())
 }
 
 // TYPES ***********************************************************************************************************************************
