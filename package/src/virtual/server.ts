@@ -1,10 +1,9 @@
+import {ActionFailure, redirect, Redirect, type RedirectStatus} from "@sveltejs/kit"
 import type {ActionAPIContext, MaybePromise} from "astro/actions/runtime/utils.js"
 import {defineAction, type ActionHandler} from "astro:actions"
 import {superValidate, type ErrorStatus, type Infer, type InferIn, type SuperValidated} from "sveltekit-superforms"
 import {zod} from "sveltekit-superforms/adapters"
 import type {z} from "zod"
-// @ts-expect-error
-import {ActionFailure, redirect, Redirect, type RedirectStatus} from "@sveltejs/kit"
 
 // ACTION **********************************************************************************************************************************
 export function defineAsfAction<
@@ -16,13 +15,10 @@ export function defineAsfAction<
   const formHandler = (async (input: z.infer<I>, context: ActionAPIContext) => {
     const form = await superValidate(context.request, zod(p.input))
     try {
-      // @ts-expect-error
       const result = await p.handler(input, {...context, form, redirect})
-      // @ts-expect-error
       if (result instanceof ActionFailure) return {type: "failure", status: result.status, data: {form, payload: result.data}}
       return {type: "success", status: result ? 200 : 204, data: {form, payload: result}}
     } catch (err) {
-      // @ts-expect-error
       if (err instanceof Redirect) return {type: "redirect", ...err}
       return {type: "error", status: 500, data: {error: err}}
     }
@@ -91,7 +87,10 @@ export type AsfActionHandler<
   I extends z.ZodType = z.ZodType,
   M = any,
   F extends Record<string, unknown> | undefined = undefined,
-> = (input: z.infer<I>, context: ActionAPIContext & {form: AsfSuperValidated<I, M>}) => MaybePromise<R | ActionFailure<F> | Redirect>
+> = (
+  input: z.infer<I>,
+  context: Omit<ActionAPIContext, "redirect"> & {form: AsfSuperValidated<I, M>; redirect: typeof redirect}
+) => MaybePromise<R | ActionFailure<F> | Redirect>
 
 export type AstroActionError = {data: AsfActionResultError; error: undefined}
 export type AstroActionFailure<I extends z.ZodType = z.ZodType> = {data: AsfActionResultFailure<I>; error: undefined}
