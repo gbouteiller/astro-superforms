@@ -29,12 +29,13 @@ export const integration = defineIntegration({
             },
           })
 
-          let [environment, forms, navigation, stores, server, serverTypes] = await Promise.all([
+          let [environment, forms, navigation, stores, server, kitTypes, serverTypes] = await Promise.all([
             fs.readFile(resolve("../templates/environment.js"), "utf-8"),
             fs.readFile(resolve("../templates/forms.js"), "utf-8"),
             fs.readFile(resolve("../templates/navigation.js"), "utf-8"),
             fs.readFile(resolve("../templates/stores.js"), "utf-8"),
             fs.readFile(resolve("./virtual/server.js"), "utf-8"),
+            fs.readFile(resolve("./virtual/kit.d.ts"), "utf-8"),
             fs.readFile(resolve("./virtual/server.d.ts"), "utf-8"),
           ])
 
@@ -53,6 +54,7 @@ export const integration = defineIntegration({
             name: "@astro/superforms",
             content: `
             declare module 'asf:actions' {${serverTypes}};
+            declare module '@sveltekit/js' {${kitTypes}};
             `,
           })
         },
