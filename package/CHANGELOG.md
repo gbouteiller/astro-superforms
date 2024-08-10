@@ -1,5 +1,11 @@
 # astro-superforms
 
+## 0.3.1
+
+### Patch Changes
+
+- fe7c9ed: use form.data instead of input inside defineAsfAction as the validation is done by supervalidate
+
 ## 0.3.0
 
 ### Minor Changes
