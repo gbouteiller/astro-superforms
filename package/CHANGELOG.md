@@ -1,5 +1,11 @@
 # astro-superforms
 
+## 0.3.4
+
+### Patch Changes
+
+- a639374: add suffix to types
+
 ## 0.3.3
 
 ### Patch Changes
