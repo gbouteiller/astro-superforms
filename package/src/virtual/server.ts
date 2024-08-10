@@ -1,4 +1,4 @@
-import {redirect, type FailReturn, type RedirectReturn, type RedirectStatus} from "@sveltejs/kit"
+import {fail, redirect, type FailReturn, type RedirectReturn, type RedirectStatus} from "@sveltejs/kit"
 import type {ActionAPIContext, MaybePromise} from "astro/actions/runtime/utils.js"
 import {defineAction, type ActionHandler, type SafeResult} from "astro:actions"
 import {isObjectLike} from "es-toolkit/compat"
@@ -15,9 +15,10 @@ export function defineAsfAction<
 >(p: {input: I; handler: AsfActionHandler<R, I, M, F>}) {
   const formHandler = (async (_, context) => {
     const form = await superValidate(context.request.clone(), zod(p.input))
+    if (!form.valid) return fail(400, {form})
     try {
       const result = await p.handler(form.data, {...context, form, redirect})
-      if (isObjectLike(result) && result.type === "failure") return {...result, data: {form, payload: result.data}}
+      if (isObjectLike(result) && result.type === "failure") return {...result, data: {form, ...result.data}}
       if (isObjectLike(result) && result.type === "redirect") return result
       return {type: "success", status: result ? 200 : 204, data: {form, payload: result}}
     } catch (err) {

@@ -12,7 +12,7 @@
   import {Input} from "@/components/ui/input"
   import {zSigninValues, type SigninValues} from "@/lib/auth"
   import {cn} from "@/lib/utils"
-  import {actions, getActionProps} from "astro:actions"
+  import {actions} from "astro:actions"
   import type {Snippet} from "svelte"
   import {toast} from "svelte-sonner"
   import {superForm, type SuperValidated} from "sveltekit-superforms"
@@ -43,13 +43,12 @@
 </script>
 
 <Card.Root class="max-w-md">
-  <form method="POST" use:enhance class="space-y-4">
+  <form method="POST" action={actions.auth.signin} use:enhance class="space-y-4">
     <Card.Header>
       <Card.Title>Card Title</Card.Title>
       <Card.Description>Card Description</Card.Description>
     </Card.Header>
     <Card.Content>
-      <input {...getActionProps(actions.auth.signin)} />
       <Form.Field {sf} name="username">
         <Form.Control let:attrs>
           <Form.Label>Username</Form.Label>

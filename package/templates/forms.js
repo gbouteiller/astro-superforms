@@ -59,7 +59,7 @@ export function enhance(_form, submit) {
     const formData = new FormData(_form)
 
     const {origin, searchParams} = new URL(_submitter?.hasAttribute("formaction") ? _submitter.formAction : _formClone.action)
-    const action = new URL(origin + `/_actions/${searchParams.get("_astroAction") ?? formData.get("_astroAction")}`)
+    const action = new URL(origin + `/_actions/${searchParams.get("_astroAction")}`)
 
     const enctype = _submitter?.hasAttribute("formenctype") ? _submitter.formEnctype : _formClone.enctype
 
@@ -92,7 +92,7 @@ export function enhance(_form, submit) {
         )
       const body = enctype === "multipart/form-data" ? formData : new URLSearchParams(formData)
       const response = await fetch(action, {method: "POST", headers, cache: "no-store", body, signal: controller.signal})
-      result = await response.json()
+      result = devalue.parse(await response.text())
       if (result.type === "error") result.status = response.status
     } catch (error) {
       if (error?.name === "AbortError") return

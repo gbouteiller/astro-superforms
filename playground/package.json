@@ -14,7 +14,7 @@
     "@astrojs/node": "^8.3.2",
     "@astrojs/svelte": "^5.7.0",
     "@astrojs/tailwind": "^5.1.0",
-    "astro": "^4.13.1",
+    "astro": "^4.13.3",
     "astro-integration-kit": "^0.16.0",
     "astro-superforms": "workspace:*",
     "bits-ui": "^0.21.13",
