@@ -1,16 +1,10 @@
 const encoder = new TextEncoder()
 
 // FAIL ************************************************************************************************************************************
-export class AsfFail<D extends Record<string, unknown> | undefined = undefined> {
-  constructor(
-    public status: ErrorStatus,
-    public data: D
-  ) {}
-}
-
 export function fail<D extends Record<string, unknown> | undefined = undefined>(status: ErrorStatus, data: D) {
-  return new AsfFail(status, data)
+  return {type: "failure" as const, status, data}
 }
+export type FailReturn<D extends Record<string, unknown> | undefined = undefined> = ReturnType<typeof fail<D>>
 
 // JSON ************************************************************************************************************************************
 export function json(data: any, init: ResponseInit) {
@@ -33,16 +27,10 @@ export function json(data: any, init: ResponseInit) {
 }
 
 // REDIRECT ********************************************************************************************************************************
-export class AsfRedirect {
-  constructor(
-    public status: RedirectStatus,
-    public location: string
-  ) {}
-}
-
 export function redirect(status: RedirectStatus, location: string | URL) {
-  throw new AsfRedirect(status, location.toString())
+  return {type: "redirect" as const, status, location: location.toString()}
 }
+export type RedirectReturn = ReturnType<typeof redirect>
 
 // TYPES ***********************************************************************************************************************************
 export type ErrorStatus = NumericRange<400, 599>

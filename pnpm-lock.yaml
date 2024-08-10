@@ -51,6 +51,9 @@ importers:
       devalue:
         specifier: ^5.0.0
         version: 5.0.0
+      es-toolkit:
+        specifier: ^1.15.1
+        version: 1.15.1
       sveltekit-superforms:
         specifier: ^2.16.1
         version: 2.16.1(@sveltejs/kit@2.5.20(@sveltejs/vite-plugin-svelte@3.1.1(svelte@5.0.0-next.208)(vite@5.3.5(@types/node@20.14.14)))(svelte@5.0.0-next.208)(vite@5.3.5(@types/node@20.14.14)))(svelte@5.0.0-next.208)
@@ -1701,6 +1704,9 @@ packages:
   es-to-primitive@1.2.1:
     resolution: {integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==}
     engines: {node: '>= 0.4'}
+
+  es-toolkit@1.15.1:
+    resolution: {integrity: sha512-2rPCylgxxpgZ3jQLyvbm+B9dNAMdHv4S80iabK9njEWxDbObhAPJCQUpqHv8iaOZrfprl3UlWhfxZd7kKSQtbg==}
 
   esbuild-runner@2.2.2:
     resolution: {integrity: sha512-fRFVXcmYVmSmtYm2mL8RlUASt2TDkGh3uRcvHFOKNr/T58VrfVeKD9uT9nlgxk96u0LS0ehS/GY7Da/bXWKkhw==}
@@ -5742,6 +5748,8 @@ snapshots:
       is-callable: 1.2.7
       is-date-object: 1.0.5
       is-symbol: 1.0.4
+
+  es-toolkit@1.15.1: {}
 
   esbuild-runner@2.2.2(esbuild@0.23.0):
     dependencies:
