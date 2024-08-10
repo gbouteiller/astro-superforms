@@ -12,10 +12,10 @@ export function defineAsfAction<
   M = any,
   F extends Record<string, unknown> | undefined = undefined,
 >(p: {input: I; handler: AsfActionHandler<R, I, M, F>}) {
-  const formHandler = (async (input: z.infer<I>, context: ActionAPIContext) => {
+  const formHandler = (async (_, context) => {
     const form = await superValidate(context.request.clone(), zod(p.input))
     try {
-      const result = await p.handler(input, {...context, form, redirect})
+      const result = await p.handler(form.data, {...context, form, redirect})
       if (result instanceof ActionFailure) return {type: "failure", status: result.status, data: {form, payload: result.data}}
       return {type: "success", status: result ? 200 : 204, data: {form, payload: result}}
     } catch (err) {
