@@ -1,5 +1,11 @@
 # astro-superforms
 
+## 0.3.2
+
+### Patch Changes
+
+- 563cef2: add sveltekit types
+
 ## 0.3.1
 
 ### Patch Changes
