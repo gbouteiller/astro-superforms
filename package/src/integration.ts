@@ -54,7 +54,7 @@ export const integration = defineIntegration({
             name: "@astro/superforms",
             content: `
             declare module 'asf:actions' {${serverTypes}};
-            declare module '@sveltekit/js' {${kitTypes}};
+            declare module '@sveltejs/kit' {${kitTypes}};
             `,
           })
         },

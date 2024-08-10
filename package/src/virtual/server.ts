@@ -1,9 +1,9 @@
-import {ActionFailure, redirect, Redirect, type RedirectStatus} from "@sveltejs/kit"
 import type {ActionAPIContext, MaybePromise} from "astro/actions/runtime/utils.js"
 import {defineAction, type ActionHandler, type SafeResult} from "astro:actions"
 import {superValidate, type ErrorStatus, type Infer, type InferIn, type SuperValidated} from "sveltekit-superforms"
 import {zod} from "sveltekit-superforms/adapters"
 import type {z} from "zod"
+import {ActionFailure, redirect, Redirect, type RedirectStatus} from "./kit.js"
 
 // ACTION **********************************************************************************************************************************
 export function defineAsfAction<
