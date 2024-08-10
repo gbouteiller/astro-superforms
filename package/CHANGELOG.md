@@ -1,5 +1,11 @@
 # astro-superforms
 
+## 0.3.5
+
+### Patch Changes
+
+- 0fd03b4: change failure and redirect to objects
+
 ## 0.3.4
 
 ### Patch Changes
