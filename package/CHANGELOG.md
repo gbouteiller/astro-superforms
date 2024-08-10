@@ -1,5 +1,14 @@
 # astro-superforms
 
+## 0.3.0
+
+### Minor Changes
+
+- 6eec400: - clone request in `defineAsfAction`
+  - remove `asfValidate` as it doesn't serve any purpose
+  - simplify types
+  - remove useless utils
+
 ## 0.2.1
 
 ### Patch Changes
