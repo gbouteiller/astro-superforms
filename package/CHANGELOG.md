@@ -1,5 +1,11 @@
 # astro-superforms
 
+## 0.3.3
+
+### Patch Changes
+
+- 6a6c76f: correct imports
+
 ## 0.3.2
 
 ### Patch Changes
