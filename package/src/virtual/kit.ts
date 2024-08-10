@@ -1,7 +1,7 @@
 const encoder = new TextEncoder()
 
 // FAIL ************************************************************************************************************************************
-export class ActionFailure<D extends Record<string, unknown> | undefined = undefined> {
+export class AsfFail<D extends Record<string, unknown> | undefined = undefined> {
   constructor(
     public status: ErrorStatus,
     public data: D
@@ -9,7 +9,7 @@ export class ActionFailure<D extends Record<string, unknown> | undefined = undef
 }
 
 export function fail<D extends Record<string, unknown> | undefined = undefined>(status: ErrorStatus, data: D) {
-  return new ActionFailure(status, data)
+  return new AsfFail(status, data)
 }
 
 // JSON ************************************************************************************************************************************
@@ -33,7 +33,7 @@ export function json(data: any, init: ResponseInit) {
 }
 
 // REDIRECT ********************************************************************************************************************************
-export class Redirect {
+export class AsfRedirect {
   constructor(
     public status: RedirectStatus,
     public location: string
@@ -41,7 +41,7 @@ export class Redirect {
 }
 
 export function redirect(status: RedirectStatus, location: string | URL) {
-  throw new Redirect(status, location.toString())
+  throw new AsfRedirect(status, location.toString())
 }
 
 // TYPES ***********************************************************************************************************************************

@@ -1,9 +1,9 @@
+import {AsfFail, AsfRedirect, redirect, type RedirectStatus} from "@sveltejs/kit"
 import type {ActionAPIContext, MaybePromise} from "astro/actions/runtime/utils.js"
 import {defineAction, type ActionHandler, type SafeResult} from "astro:actions"
 import {superValidate, type ErrorStatus, type Infer, type InferIn, type SuperValidated} from "sveltekit-superforms"
 import {zod} from "sveltekit-superforms/adapters"
 import type {z} from "zod"
-import {ActionFailure, redirect, Redirect, type RedirectStatus} from "./kit.js"
 
 // ACTION **********************************************************************************************************************************
 export function defineAsfAction<
@@ -16,10 +16,10 @@ export function defineAsfAction<
     const form = await superValidate(context.request.clone(), zod(p.input))
     try {
       const result = await p.handler(form.data, {...context, form, redirect})
-      if (result instanceof ActionFailure) return {type: "failure", status: result.status, data: {form, payload: result.data}}
+      if (result instanceof AsfFail) return {type: "failure", status: result.status, data: {form, payload: result.data}}
       return {type: "success", status: result ? 200 : 204, data: {form, payload: result}}
     } catch (err) {
-      if (err instanceof Redirect) return {type: "redirect", ...err}
+      if (err instanceof AsfRedirect) return {type: "redirect", ...err}
       return {type: "error", status: 500, data: {error: err}}
     }
   }) as ActionHandler<I, AsfResult<R, I, M>>
@@ -64,6 +64,6 @@ export type AsfActionHandler<
 > = (
   input: z.infer<I>,
   context: Omit<ActionAPIContext, "redirect"> & {form: AsfSuperValidated<I, M>; redirect: typeof redirect}
-) => MaybePromise<R | ActionFailure<F> | Redirect>
+) => MaybePromise<R | AsfFail<F> | AsfRedirect>
 
 export type AsfSafeResult<R = unknown, I extends z.ZodType = z.ZodType, M = any> = SafeResult<any, AsfResult<R, I, M>>
