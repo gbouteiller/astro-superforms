@@ -1,12 +1,11 @@
 ---
 import Main from "@/layouts/main.astro"
 import {zSigninValues} from "@/lib/auth"
-import {asfValidate} from "asf:actions"
-import {actions} from "astro:actions"
+import {superValidate} from "sveltekit-superforms"
+import {zod} from "sveltekit-superforms/adapters"
 import Form from "./_form.svelte"
 
-const result = Astro.getActionResult(actions.auth.signin)
-const sv = await asfValidate(Astro.request, result, zSigninValues)
+const sv = await superValidate(Astro.request, zod(zSigninValues))
 ---
 
 <Main>

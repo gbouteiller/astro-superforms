@@ -1,8 +1,17 @@
 ---
 import Main from "@/layouts/main.astro"
+import {zSigninValues} from "@/lib/auth"
+import {getRedirectLocation} from "asf:actions"
+import {actions} from "astro:actions"
+import {superValidate} from "sveltekit-superforms"
+import {zod} from "sveltekit-superforms/adapters"
 import Form from "./_form.svelte"
+
+const location = getRedirectLocation(Astro.getActionResult(actions.auth.signin))
+if (location) return Astro.redirect(location)
+const sv = await superValidate(Astro.request, zod(zSigninValues))
 ---
 
 <Main>
-  <Form />
+  <Form {sv} />
 </Main>
