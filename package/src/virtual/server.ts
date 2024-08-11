@@ -17,12 +17,11 @@ export function defineAsfAction<
     const form = await superValidate(context.request.clone(), zod(p.input))
     if (!form.valid) return fail(400, {form})
     try {
-      const result = await p.handler(form.data, {...context, form, redirect})
-      if (isObjectLike(result) && result.type === "failure") return {...result, data: {form, ...result.data}}
-      if (isObjectLike(result) && result.type === "redirect") return result
-      return {type: "success", status: result ? 200 : 204, data: {form, payload: result}}
+      const data = await p.handler(form.data, {...context, form, redirect})
+      if (isObjectLike(data) && ["failure", "redirect"].includes(data.type)) return data
+      return {type: "success", status: 200, data}
     } catch (err) {
-      return {type: "error", status: 500, data: {error: err}}
+      return {type: "error", status: 500, data: err}
     }
   }) as ActionHandler<I, AsfResult<R, I, M>>
   return defineAction<AsfResult<R, I, M>, "form", I>({accept: "form", handler: formHandler})
