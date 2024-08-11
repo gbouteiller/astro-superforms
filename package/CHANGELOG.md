@@ -1,5 +1,11 @@
 # astro-superforms
 
+## 0.4.1
+
+### Patch Changes
+
+- ac99ee9: let the user set form in result
+
 ## 0.4.0
 
 ### Minor Changes
