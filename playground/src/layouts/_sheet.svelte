@@ -1,6 +1,6 @@
 <script lang="ts">
-  import {Button} from "@/components/ui/button"
-  import * as Sheet from "@/components/ui/sheet"
+  import { Button } from "@/components/ui/button";
+  import * as Sheet from "@/components/ui/sheet";
 </script>
 
 <Sheet.Root>

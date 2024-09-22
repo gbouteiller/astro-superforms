@@ -1,8 +1,8 @@
-import {readable, writable} from "svelte/store"
+import { readable, writable } from "svelte/store";
 
-export const navigating = readable(false)
+export const navigating = readable(false);
 
-const baseUrl = "https://test.de"
+const baseUrl = "https://test.de";
 
 export const page = writable({
   url: new URL("/", baseUrl),
@@ -15,4 +15,4 @@ export const page = writable({
   data: {},
   state: {},
   form: null,
-})
+});

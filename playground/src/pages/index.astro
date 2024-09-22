@@ -1,11 +1,11 @@
 ---
-import Main from "@/layouts/main.astro"
-import {zSigninValues} from "@/lib/auth"
-import {superValidate} from "sveltekit-superforms"
-import {zod} from "sveltekit-superforms/adapters"
-import Form from "./_form.svelte"
+import Main from "@/layouts/main.astro";
+import { zSigninValues } from "@/lib/auth";
+import { superValidate } from "sveltekit-superforms";
+import { zod } from "sveltekit-superforms/adapters";
+import Form from "./_form.svelte";
 
-const sv = await superValidate(Astro.request, zod(zSigninValues))
+const sv = await superValidate(Astro.request, zod(zSigninValues));
 ---
 
 <Main>

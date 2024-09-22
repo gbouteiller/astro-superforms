@@ -11,31 +11,31 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/node": "^8.3.2",
-    "@astrojs/svelte": "^5.7.0",
-    "@astrojs/tailwind": "^5.1.0",
-    "astro": "^4.13.3",
-    "astro-integration-kit": "^0.16.0",
+    "@astrojs/node": "^8.3.4",
+    "@astrojs/svelte": "^5.7.1",
+    "@astrojs/tailwind": "^5.1.1",
+    "astro": "^4.15.8",
+    "astro-integration-kit": "^0.16.1",
     "astro-superforms": "workspace:*",
-    "bits-ui": "^0.21.13",
+    "bits-ui": "^0.21.15",
     "clsx": "^2.1.1",
     "devalue": "^5.0.0",
     "formsnap": "^1.0.1",
-    "lucide-svelte": "^0.424.0",
+    "lucide-svelte": "^0.445.0",
     "mode-watcher": "^0.4.1",
     "svelte": "5.0.0-next.208",
-    "svelte-sonner": "^0.3.27",
-    "sveltekit-superforms": "^2.16.1",
-    "tailwind-merge": "^2.4.0",
+    "svelte-sonner": "^0.3.28",
+    "sveltekit-superforms": "^2.19.0",
+    "tailwind-merge": "^2.5.2",
     "tailwind-variants": "^0.2.1",
-    "tailwindcss": "^3.4.7",
+    "tailwindcss": "^3.4.12",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.1",
+    "@astrojs/check": "^0.9.3",
     "@egoist/tailwindcss-icons": "^1.8.1",
-    "@iconify/json": "^2.2.234",
-    "@types/node": "^20.14.14",
-    "typescript": "^5.5.4"
+    "@iconify/json": "^2.2.251",
+    "@types/node": "^22.5.5",
+    "typescript": "^5.6.2"
   }
 }

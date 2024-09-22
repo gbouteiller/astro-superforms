@@ -15,15 +15,15 @@
     "lint:fix": "biome check --apply ."
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.7",
-    "@typescript-eslint/parser": "^8.0.0",
-    "eslint": "^9.8.0",
-    "eslint-plugin-astro": "^1.2.3",
-    "eslint-plugin-jsx-a11y": "^6.9.0",
-    "eslint-plugin-svelte": "^2.43.0",
+    "@changesets/cli": "^2.27.8",
+    "@typescript-eslint/parser": "^8.6.0",
+    "eslint": "^9.11.0",
+    "eslint-plugin-astro": "^1.2.4",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "eslint-plugin-svelte": "^2.44.0",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-svelte": "^3.2.6",
-    "prettier-plugin-tailwindcss": "^0.6.5"
+    "prettier-plugin-tailwindcss": "^0.6.6"
   }
 }

@@ -1,22 +1,20 @@
-import {addDts, addVirtualImports, createResolver, defineIntegration, hasIntegration} from "astro-integration-kit"
-import {promises as fs} from "node:fs"
-
-// TODO: INSTALL DEVALUE ON THE APP
-// TODO: ADD TYPE COMMMENTS BACK
+import { addVirtualImports, createResolver, defineIntegration, hasIntegration } from "astro-integration-kit";
+import { readFile } from "node:fs/promises";
 
 export const integration = defineIntegration({
   name: "astro-superforms",
-  setup({name}) {
-    const {resolve} = createResolver(import.meta.url)
+  setup({ name }) {
+    const { resolve } = createResolver(import.meta.url);
     return {
       hooks: {
         "astro:config:setup": async (params) => {
-          if (!hasIntegration(params, {name: "@astrojs/svelte"})) {
-            params.logger.error("astro-superforms requires @astrojs/svelte to be installed")
-            return
+          const { logger, updateConfig } = params;
+          if (!hasIntegration(params, { name: "@astrojs/svelte" })) {
+            logger.error("astro-superforms requires @astrojs/svelte to be installed");
+            return;
           }
 
-          params.updateConfig({
+          updateConfig({
             vite: {
               optimizeDeps: {
                 exclude: ["$app/environment", "$app/forms", "$app/navigation", "$app/stores"],
@@ -27,17 +25,15 @@ export const integration = defineIntegration({
                 },
               },
             },
-          })
+          });
 
-          let [environment, forms, navigation, stores, server, kitTypes, serverTypes] = await Promise.all([
-            fs.readFile(resolve("../templates/environment.js"), "utf-8"),
-            fs.readFile(resolve("../templates/forms.js"), "utf-8"),
-            fs.readFile(resolve("../templates/navigation.js"), "utf-8"),
-            fs.readFile(resolve("../templates/stores.js"), "utf-8"),
-            fs.readFile(resolve("./virtual/server.js"), "utf-8"),
-            fs.readFile(resolve("./virtual/kit.d.ts"), "utf-8"),
-            fs.readFile(resolve("./virtual/server.d.ts"), "utf-8"),
-          ])
+          let [environment, forms, navigation, stores, server] = await Promise.all([
+            readFile(resolve("../assets/environment.js"), "utf-8"),
+            readFile(resolve("../assets/forms.js"), "utf-8"),
+            readFile(resolve("../assets/navigation.js"), "utf-8"),
+            readFile(resolve("../assets/stores.js"), "utf-8"),
+            readFile(resolve("./virtual/server.js"), "utf-8"),
+          ]);
 
           addVirtualImports(params, {
             name,
@@ -46,19 +42,20 @@ export const integration = defineIntegration({
               "$app/forms": forms,
               "$app/navigation": navigation,
               "$app/stores": stores,
-              "asf:actions": server,
+              "superforms:astro": server,
             },
-          })
+          });
+        },
+        "astro:config:done": async ({ injectTypes }) => {
+          const inject = (filename: string, module: string) => (content: string) =>
+            injectTypes({ filename, content: `declare module "${module}" {\n${content}\n};` });
 
-          addDts(params, {
-            name: "@astro/superforms",
-            content: `
-            declare module 'asf:actions' {${serverTypes}};
-            declare module '@sveltejs/kit' {${kitTypes}};
-            `,
-          })
+          await Promise.all([
+            readFile(resolve("./virtual/kit.d.ts"), "utf-8").then(inject("env.d.ts", "@sveltejs/kit")),
+            readFile(resolve("./virtual/server.d.ts"), "utf-8").then(inject("types.d.ts", "superforms:astro")),
+          ]);
         },
       },
-    }
+    };
   },
-})
+});
