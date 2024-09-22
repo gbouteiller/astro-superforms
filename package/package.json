@@ -31,7 +31,7 @@
   },
   "files": [
     "dist",
-    "templates"
+    "assets"
   ],
   "scripts": {
     "dev": "tsup --watch",
@@ -41,17 +41,15 @@
   "peerDependencies": {
     "astro": "^4.13.1",
     "devalue": "^5.0.0",
-    "sveltekit-superforms": "^2.16.1",
-    "zod": "^3.23.8"
+    "sveltekit-superforms": "^2.16.1"
   },
   "dependencies": {
-    "astro-integration-kit": "^0.16.1"
+    "astro-integration-kit": "^0.16.1",
+    "es-toolkit": "^1.20.0"
   },
   "devDependencies": {
     "devalue": "^5.0.0",
-    "es-toolkit": "^1.20.0",
     "sveltekit-superforms": "^2.19.0",
-    "tsup": "^8.3.0",
-    "zod": "^3.23.8"
+    "tsup": "^8.3.0"
   }
 }
