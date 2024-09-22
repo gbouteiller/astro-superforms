@@ -1,5 +1,11 @@
 # astro-superforms
 
+## 0.5.0
+
+### Minor Changes
+
+- 8a9492b: change virtual module name from asf:actions to superforms:astro
+
 ## 0.4.1
 
 ### Patch Changes
