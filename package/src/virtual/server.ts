@@ -4,7 +4,7 @@ import { defineAction, type ActionHandler, type SafeResult } from "astro:actions
 import { isObjectLike } from "es-toolkit/compat";
 import { superValidate, type ErrorStatus, type Infer, type InferIn, type SuperValidated } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
-import type { z } from "zod";
+import type { z } from "astro/zod";
 
 // ACTION **********************************************************************************************************************************
 export function defineAsfAction<

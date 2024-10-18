@@ -2,7 +2,7 @@
 
 Astro integration to use Sveltekit Superforms in your Astro + Svelte projects
 
-To see how to get started, check out the [package README](./package/README.md)
+To see how to get started, check out the [docs](https://astro-pocketbase-five.vercel.app)
 
 ## Licensing
 

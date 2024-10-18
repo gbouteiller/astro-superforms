@@ -1,0 +1,30 @@
+---
+title: Welcome to Astro Superforms
+description: Astro integration to ease the use of Superforms in your Astro projects
+template: splash
+hero:
+  tagline: Add Superforms to Astro with ease!
+  image:
+    file: ../../assets/houston.webp
+  actions:
+    - text: Get started
+      link: /start-here/getting-started/
+      icon: right-arrow
+    - text: View on GitHub
+      link: https://github.com/gbouteiller/astro-superforms
+      icon: external
+      variant: minimal
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+
+## Also check out...
+
+<CardGrid stagger>
+	<Card title="Astro PocketBase" icon="puzzle">
+		Add [PocketBase to Astro](https://astro-pocketbase-five.vercel.app) with ease!
+	</Card>
+	<Card title="Zod PocketBase" icon="puzzle">
+		Add [Zod to PocketBase](https://zod-pocketbase.vercel.app) with ease!
+	</Card>
+</CardGrid>

@@ -1,0 +1,85 @@
+---
+title: Usage
+description: How to use the Astro Superforms integration.
+---
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Create a validation schema
+
+    ```ts
+    // src/schemas.ts
+    import { z } from "astro/zod";
+
+    export const zNewsletterValues = z.object({
+      email: z.string().email().min(1),
+    });
+
+    export type NewsletterValues = z.infer<typeof zNewsletterValues>;
+    ```
+
+2. Create your action
+
+    ```ts
+    // src/actions/index.ts
+    import { zNewsletterValues } from "@/lib/utils";
+    import { defineAsfAction } from "superforms:astro";
+    import { message } from "sveltekit-superforms";
+
+    export const server = {
+      //...
+      subscribeToNewsletter: defineAsfAction({
+        input: zNewsletterValues,
+        handler: async ({ email }, { form }) => {
+          return message(form, "SUCCESS");
+        },
+      }),
+      //...
+    };
+    ```
+
+2. Initialize the form in your astro layout, page or component
+
+    ```astro
+    // src/pages/index.astro
+    ---
+    import { zNewsletterValues } from "src/schemas";
+    import { superValidate } from "sveltekit-superforms";
+    import { zod } from "sveltekit-superforms/adapters";
+    import Form from "./_form.svelte";
+
+    const sv = await superValidate(Astro.request, zod(zNewsletterValues));
+    ---
+
+    <Form client:visible {sv} />
+    ```
+
+3. Display the form in your svelte component
+
+    ```svelte
+    // src/pages/_form.svelte
+    <script lang="ts">
+      import { zNewsletterValues, type NewsletterValues } from "src/schemas";
+      import { actions } from "astro:actions";
+      import { superForm, type SuperValidated } from "sveltekit-superforms";
+      import { zodClient } from "sveltekit-superforms/adapters";
+
+      let { sv }: { sv: SuperValidated<NewsletterValues> } = $props();
+
+      const sf = superForm(sv, {
+        validators: zodClient(zNewsletterValues),
+        onUpdated: ({ form: { message } }) => {
+          if (message) console.log(message);
+        },
+      });
+      const { enhance, form } = sf;
+    </script>
+
+    <form method="POST" action={actions.subscribeToNewsletter} use:enhance>
+      <input type="email" bind:value={$form.email} />
+      <button type="submit">Subscribe</button>
+    </form>
+
+    ```
+</Steps>

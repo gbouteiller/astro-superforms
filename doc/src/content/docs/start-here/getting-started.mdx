@@ -1,0 +1,40 @@
+---
+title: Getting started
+description: How to automatically setup the Astro Superforms integration.
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+
+This integration eases the use of **Superforms** in your **Astro** projects by:
+- mimicking `sveltekit` types and methods used by **Superforms**
+- providing types and helpers specific to **Astro**
+
+## Installation
+
+Astro includes an `astro add` command to automate the setup of official integrations. If you prefer, you can [install integrations manually](/start-here/manual-setup) instead.
+
+<Steps>
+
+1. To install `astro-superforms`, run the following from your project directory and follow the prompts:
+
+    <Tabs>
+      <TabItem label="npm">
+        ```shell
+        npx astro add astro-superforms
+        ```
+      </TabItem>
+      <TabItem label="pnpm">
+        ```shell
+        pnpm astro add astro-superforms
+        ```
+      </TabItem>
+      <TabItem label="yarn">
+        ```shell
+        yarn astro add astro-superforms
+        ```
+      </TabItem>
+    </Tabs>
+
+</Steps>
+
+If you run into any issues, [feel free to report them to us on GitHub](https://github.com/gbouteiller/astro-superforms/issues) and try the manual setup instead.
