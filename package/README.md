@@ -4,7 +4,7 @@ This is an [Astro integration](https://docs.astro.build/en/guides/integrations-g
 
 ## Usage
 
-To see how to get started, check out the [docs](https://astro-pocketbase-five.vercel.app)
+To see how to get started, check out the [docs](https://astro-superforms.vercel.app)
 
 ## Licensing
 
