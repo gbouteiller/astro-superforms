@@ -1,10 +1,10 @@
 const encoder = new TextEncoder();
 
 // FAIL ************************************************************************************************************************************
-export function fail<D extends Record<string, unknown> | undefined = undefined>(status: ErrorStatus, data: D) {
+export function fail<D extends AnyData = undefined>(status: ErrorStatus, data: D) {
   return { type: "failure" as const, status, data };
 }
-export type FailReturn<D extends Record<string, unknown> | undefined = undefined> = ReturnType<typeof fail<D>>;
+export type FailReturn<D extends AnyData = undefined> = ReturnType<typeof fail<D>>;
 
 // JSON ************************************************************************************************************************************
 export function json(data: any, init: ResponseInit) {
@@ -33,6 +33,7 @@ export function redirect(status: RedirectStatus, location: string | URL) {
 export type RedirectReturn = ReturnType<typeof redirect>;
 
 // TYPES ***********************************************************************************************************************************
+export type AnyData = Record<string, unknown> | undefined;
 export type ErrorStatus = NumericRange<400, 599>;
 export type RedirectStatus = NumericRange<300, 308>;
 
