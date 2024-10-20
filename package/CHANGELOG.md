@@ -1,5 +1,12 @@
 # astro-superforms
 
+## 0.5.2
+
+### Patch Changes
+
+- 2ecfed1: remove console.log
+- 2ecfed1: remove es-toolkit dependency
+
 ## 0.5.1
 
 ### Patch Changes
