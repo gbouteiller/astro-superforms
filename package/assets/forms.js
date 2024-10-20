@@ -6,7 +6,7 @@ import { tick } from "svelte";
 // APPLY ACTION ****************************************************************************************************************************
 export async function applyAction(result) {
   if (import.meta.env.SSR) throw new Error("Cannot call applyAction(...) on the server");
-  console.log("applyAction", result);
+  // console.log("applyAction", result);
 
   if (result.type === "error") {
     // const url = new URL(location.href)
