@@ -1,7 +1,6 @@
 import { fail, redirect, type AnyData, type FailReturn, type RedirectReturn, type RedirectStatus } from "@sveltejs/kit";
 import type { ActionAPIContext, MaybePromise } from "astro/actions/runtime/utils.js";
 import { defineAction, type ActionHandler, type SafeResult } from "astro:actions";
-import { isObjectLike } from "es-toolkit/compat";
 import { superValidate, type ErrorStatus, type Infer, type InferIn, type SuperValidated } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 import type { z, ZodType } from "astro/zod";
@@ -23,6 +22,10 @@ export function defineAsfAction<R = unknown, I extends ZodType = ZodType, M = an
     }
   }) as ActionHandler<I, AsfResult<R, I, M>>;
   return defineAction<AsfResult<R, I, M>, "form", I>({ accept: "form", handler: formHandler });
+}
+
+function isObjectLike(value: unknown): value is object {
+  return typeof value === "object" && value !== null;
 }
 
 // UTILS ***********************************************************************************************************************************

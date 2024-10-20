@@ -1,0 +1,145 @@
+---
+title: With shadcn-svelte
+description: A complete example with shadcn svelte
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Install **Astro** and **shadcn-svelte** following these [instructions](https://www.shadcn-svelte.com/docs/installation/astro)
+
+2. Install the **astro-superforms** integration following these [instructions](/start-here/getting-started)
+
+3. Install some components from **shadcn-svelte**
+
+    ```bash
+    pnpm dlx shadcn-svelte@latest add card form input sonner
+    ```
+4. Create a validation schema and a type for your message
+
+    ```ts
+    // src/schemas.ts
+    import { z } from "astro/zod";
+    import type { ActionError } from "astro:actions";
+
+    export const zNewsletterValues = z.object({
+        email: z.string().email().min(1),
+    });
+
+    export type NewsletterValues = z.infer<typeof zNewsletterValues>;
+
+    export type Message = ActionError["code"] | "SUCCESS";
+    ```
+
+5. Create your action
+
+    ```ts
+    // src/actions/index.ts
+    import { zNewsletterValues } from "@/lib/utils";
+    import { defineAsfAction } from "superforms:astro";
+    import { message } from "sveltekit-superforms";
+
+    export const server = {
+        //...
+        subscribeToNewsletter: defineAsfAction({
+            input: zNewsletterValues,
+            handler: async ({ email }, { form }) => {
+                await new Promise((resolve) => setTimeout(resolve, 2000));
+                const response = Math.random();
+                if (response < 0.3) return message<Message>(form, "BAD_REQUEST", { status: 400 });
+                if (response < 0.5) return message<Message>(form, "CONFLICT", { status: 409 });
+                return message<Message>(form, "SUCCESS");
+            },
+        }),
+        //...
+    };
+    ```
+6. Initialize the form in your astro index page
+
+    ```diff lang="astro"
+    // src/pages/index.astro
+    ---
+    import "$lib/styles/app.css";
+    +import { superValidate } from "sveltekit-superforms";
+    +import { zod } from "sveltekit-superforms/adapters";
+    +import { zNewsletterValues } from "$lib/schemas";
+    +import Form from "./_form.svelte";
+
+    +const sv = await superValidate(Astro.request, zod(zNewsletterValues));
+    ---
+
+    <html lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+            <meta name="viewport" content="width=device-width" />
+            <meta name="generator" content={Astro.generator} />
+            <title>Astro</title>
+        </head>
+    -   <body>
+    +   <body class="flex items-center justify-center min-h-screen">
+    +       <Form client:load {sv} />
+        </body>
+    </html>
+    ```
+7. Display the form in your svelte component
+
+    ```svelte
+    // src/pages/_form.svelte
+   <script lang="ts">
+    import * as Card from "$lib/components/ui/card";
+    import * as Form from "$lib/components/ui/form";
+    import { Input } from "$lib/components/ui/input";
+    import { Toaster } from "$lib/components/ui/sonner";
+    import { zNewsletterValues, type Message, type NewsletterValues } from "$lib/schemas";
+    import { actions } from "astro:actions";
+    import { toast } from "svelte-sonner";
+    import { superForm, type SuperValidated } from "sveltekit-superforms";
+    import { zodClient } from "sveltekit-superforms/adapters";
+
+    let { sv }: { sv: SuperValidated<NewsletterValues, Message> } = $props();
+
+    const sf = superForm(sv, {
+        validators: zodClient(zNewsletterValues),
+        onError: () => {
+        toast.error(i18n());
+        },
+        onUpdated: ({ form: { message, valid } }) => {
+        if (message) valid ? toast.success(i18n(message)) : toast.error(i18n(message));
+        },
+    });
+    const { delayed, enhance, form, submitting } = sf;
+
+    function i18n(code?: Message) {
+        if (code === "BAD_REQUEST") return "An error occurred. Please try again later.";
+        if (code === "CONFLICT") return "You are already subscribed.";
+        if (code === "SUCCESS") return "Successfully subscribed.";
+        return "An error occurred. Please try again later.";
+    }
+    </script>
+
+    <Card.Root class="w-full max-w-md">
+        <form method="POST" action={actions.subscribeToNewsletter} use:enhance novalidate>
+            <Card.Header>
+                <Card.Title>Newsletter</Card.Title>
+                <Card.Description>Please enter your email address to subscribe to our newsletter.</Card.Description>
+            </Card.Header>
+            <Card.Content>
+                <Form.Field form={sf} name="email">
+                    <Form.Control let:attrs>
+                        <Input {...attrs} type="email" bind:value={$form.email} />
+                    </Form.Control>
+                    <Form.FieldErrors />
+                </Form.Field>
+            </Card.Content>
+            <Card.Footer>
+                <Form.Button disabled={$submitting}>{$delayed ? "Subscribing..." : "Subscribe"}</Form.Button>
+            </Card.Footer>
+        </form>
+    </Card.Root>
+    <Toaster />
+
+    ```
+</Steps>
+
