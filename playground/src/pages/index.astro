@@ -1,13 +1,24 @@
 ---
-import Main from "@/layouts/main.astro";
-import { zSigninValues } from "@/lib/auth";
+import "@/styles/app.css";
+
+import { zNewsletterValues } from "@/lib/utils";
 import { superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 import Form from "./_form.svelte";
 
-const sv = await superValidate(Astro.request, zod(zSigninValues));
+const sv = await superValidate(Astro.request, zod(zNewsletterValues));
 ---
 
-<Main>
-  <Form client:load {sv} />
-</Main>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+  </head>
+  <body class="flex min-h-screen items-center justify-center">
+    <Form client:load {sv} />
+  </body>
+</html>

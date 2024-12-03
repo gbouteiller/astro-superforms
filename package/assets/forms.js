@@ -59,7 +59,7 @@ export function enhance(_form, submit) {
     const formData = new FormData(_form);
 
     const { origin, searchParams } = new URL(_submitter?.hasAttribute("formaction") ? _submitter.formAction : _formClone.action);
-    const action = new URL(origin + `/_actions/${searchParams.get("_astroAction")}`);
+    const action = new URL(origin + `/_actions/${searchParams.get("_action")}`);
 
     const enctype = _submitter?.hasAttribute("formenctype") ? _submitter.formEnctype : _formClone.enctype;
 

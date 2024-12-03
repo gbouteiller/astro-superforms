@@ -1,5 +1,11 @@
 # astro-superforms
 
+## 1.0.0
+
+### Major Changes
+
+- update to astro 5
+
 ## 0.5.2
 
 ### Patch Changes

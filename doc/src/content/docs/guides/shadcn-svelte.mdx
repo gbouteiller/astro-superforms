@@ -127,8 +127,10 @@ import { Steps } from '@astrojs/starlight/components';
             </Card.Header>
             <Card.Content>
                 <Form.Field form={sf} name="email">
-                    <Form.Control let:attrs>
-                        <Input {...attrs} type="email" bind:value={$form.email} />
+                    <Form.Control>
+                        {#snippet children({ props })}
+                            <Input {...props} type="email" bind:value={$form.email} />
+                        {/snippet}
                     </Form.Control>
                     <Form.FieldErrors />
                 </Form.Field>
